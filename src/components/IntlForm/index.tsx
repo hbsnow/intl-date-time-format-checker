@@ -1,0 +1,1 @@
+export { IntlForm } from "./IntlForm";
