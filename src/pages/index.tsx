@@ -2,6 +2,7 @@ import React from "react";
 
 import { NextPage } from "next";
 import dynamic from "next/dynamic";
+import { classnames } from "tailwindcss-classnames";
 
 import { IntlForm } from "../components/IntlForm";
 import { Props as IntlListProps } from "../components/IntlList";
@@ -15,18 +16,35 @@ const IntlList = dynamic<IntlListProps>(
 const Page: NextPage = () => {
   return (
     <div className="grid grid-flow-row auto-rows-max">
-      <header className="container mx-auto p-4">
-        <IntlTitle />
+      <header className={classnames("p-4", "bg-white")}>
+        <div className={classnames("container", "mx-auto")}>
+          <IntlTitle />
+        </div>
       </header>
 
-      <main className="grid grid-flow-row auto-rows-max">
-        <div className="p-4 bg-gradient-to-r from-blue-600 to-purple-500">
-          <div className="container mx-auto p-4 bg-white rounded-lg">
+      <main className={classnames("grid", "grid-flow-row", "auto-rows-max")}>
+        <div
+          className={classnames(
+            "p-4",
+            "bg-gradient-to-r",
+            "from-blue-600",
+            "to-purple-500"
+          )}
+        >
+          <div
+            className={classnames(
+              "container",
+              "mx-auto",
+              "p-4",
+              "bg-white",
+              "rounded-lg"
+            )}
+          >
             <IntlForm />
           </div>
         </div>
-        <div className="p-4">
-          <div className="container mx-auto">
+        <div className={classnames("p-4")}>
+          <div className={classnames("container", "mx-auto")}>
             <IntlList />
           </div>
         </div>

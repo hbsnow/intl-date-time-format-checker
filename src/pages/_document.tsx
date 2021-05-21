@@ -37,7 +37,7 @@ class BaseDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&amp;display=swap&amp;text=Intl.DateTimeFormatChecker"
           />
         </Head>
-        <body>
+        <body className="bg-gradient-to-r from-blue-50 to-purple-50">
           <Main />
           <NextScript />
         </body>
