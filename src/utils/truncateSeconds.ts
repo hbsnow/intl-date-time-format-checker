@@ -3,7 +3,7 @@
  *
  * 秒を0にしないと一部ブラウザのdatetimeのフォームで秒が表示されてしまうため
  */
-export const formatDate = (date: Date): string => {
+export const truncateSeconds = (date: Date): string => {
   date.setSeconds(0);
   return date.toISOString().split(".")[0];
 };

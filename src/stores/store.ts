@@ -1,17 +1,25 @@
 import { proxy } from "valtio";
 
-import { formatDate } from "../utils/formatDate";
+import { truncateSeconds } from "../utils/truncateSeconds";
 
 type Store = {
-  locale: string;
+  locale: {
+    browser: string | undefined;
+    form: string;
+  };
   datetime: string;
   secounds: number;
+  options: Intl.DateTimeFormatOptions[];
 };
 
 export const initialState: Store = {
-  locale: "en-US",
-  datetime: formatDate(new Date()),
+  locale: {
+    browser: undefined,
+    form: "en-US",
+  },
+  datetime: truncateSeconds(new Date()),
   secounds: new Date().getSeconds(),
+  options: [],
 };
 
 export const store = proxy<Store>(initialState);

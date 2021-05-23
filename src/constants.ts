@@ -1,9 +1,6 @@
-export const datetimeOptionList = {
+export const options = {
   dateStyle: ["full", "long", "medium", "short"],
   timeStyle: ["full", "long", "medium", "short"],
-} as const;
-
-export const detailOptionsList = {
   formatMatcher: ["basic", "best fit"],
   weekday: ["long", "short", "narrow"],
   era: ["long", "short", "narrow"],
@@ -55,3 +52,5 @@ export const detailOptionsList = {
     "tibt",
   ],
 } as const;
+
+export const optionKeys = Object.keys(options) as (keyof typeof options)[];
