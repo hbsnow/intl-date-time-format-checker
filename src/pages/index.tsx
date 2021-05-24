@@ -24,7 +24,7 @@ const Page: NextPage = () => {
   const snap = useSnapshot(store);
 
   return (
-    <div className="grid grid-flow-row auto-rows-max">
+    <div className={classnames("grid", "grid-flow-row", "auto-rows-max")}>
       <header className={classnames("p-4", "bg-white")}>
         <div className={classnames("container", "mx-auto")}>
           <IntlTitle />
@@ -65,7 +65,7 @@ const Page: NextPage = () => {
 
             <div className={classnames("p-4")}>
               <div className={classnames("container", "mx-auto")}>
-                <IntlList options={snap.options} />
+                <IntlList options={snap.options} deletable />
               </div>
             </div>
           </>
