@@ -140,7 +140,7 @@ export const IntlOptionEditor = (props: Props): JSX.Element => {
             onChange={handleValueChange}
             value={selectedValue}
           >
-            {options[selectedKey].map((item: unknown, i: number) => {
+            {options[selectedKey].map((item: unknown) => {
               if (typeof item !== "string" && typeof item !== "number") {
                 throw new Error(
                   "error: type of value must be string or number"
@@ -148,7 +148,7 @@ export const IntlOptionEditor = (props: Props): JSX.Element => {
               }
 
               return (
-                <option key={item} value={item} selected={i === 0}>
+                <option key={item} value={item}>
                   {item}
                 </option>
               );

@@ -4,9 +4,11 @@ import React, {
   useState,
 } from "react";
 
+import sortBy from "lodash.sortby";
 import { classnames } from "tailwindcss-classnames";
 import { useSnapshot } from "valtio";
 
+import { optionKeys } from "../../constants";
 import { Button } from "../../elements/Button";
 import { store } from "../../stores/store";
 import { IntlOptionEditor } from "../IntlOptionEditor";
@@ -20,7 +22,17 @@ export const AddCard = (props: Props): JSX.Element => {
   const [option, setOption] = useState<Intl.DateTimeFormatOptions>({});
 
   const handleSubmitClick: MouseEventHandler<HTMLButtonElement> = () => {
-    store.options = [option, ...snap.options];
+    const keys = Object.keys(option) as typeof optionKeys;
+
+    const sortedOption = sortBy(keys, (key) => {
+      const index = optionKeys.indexOf(key);
+      return index === -1 ? undefined : index;
+    }).reduce(
+      (prev, current) => ({ ...prev, ...{ [current]: option[current] } }),
+      {}
+    );
+
+    store.options = [sortedOption, ...snap.options];
   };
 
   const handleResetClick: MouseEventHandler<HTMLButtonElement> = () => {

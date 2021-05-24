@@ -19,13 +19,13 @@ export const IntlOptionViewer = (props: Props): JSX.Element => {
           }
 
           return (
-            <>
+            <span key={key}>
               {`\n  `}
               <span className={classnames("text-blue-50")}>{key}</span>
               <span className={classnames("text-gray-400")}>: </span>
               <span className={classnames("text-blue-300")}>{value}</span>
               <span className={classnames("text-gray-400")}>,</span>
-            </>
+            </span>
           );
         })}
 
