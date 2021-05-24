@@ -59,6 +59,7 @@ export const IntlList = (props: Props): JSX.Element => {
               onClick={handleDeleteClick}
             >
               <svg
+                role="img"
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
                 fill="none"
