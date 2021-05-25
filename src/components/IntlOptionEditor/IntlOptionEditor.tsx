@@ -21,7 +21,7 @@ export const IntlOptionEditor = (props: Props): JSX.Element => {
   const { option, setOption } = props;
 
   const [selectedKey, setSelectedKey] = useState(optionKeys[0]);
-  const [selectedValue, setSelectedValue] = useState<string | number>(
+  const [selectedValue, setSelectedValue] = useState<string | number | boolean>(
     options[optionKeys[0]][0]
   );
 
@@ -138,7 +138,7 @@ export const IntlOptionEditor = (props: Props): JSX.Element => {
           <select
             className={classnames("rounded", "text-sm")}
             onChange={handleValueChange}
-            value={selectedValue}
+            value={`${selectedValue}`}
           >
             {options[selectedKey].map((item: unknown) => {
               if (typeof item !== "string" && typeof item !== "number") {
