@@ -1,17 +1,6 @@
 export const options = {
   dateStyle: ["full", "long", "medium", "short"],
   timeStyle: ["full", "long", "medium", "short"],
-  formatMatcher: ["basic", "best fit"],
-  weekday: ["long", "short", "narrow"],
-  era: ["long", "short", "narrow"],
-  year: ["numeric", "2-digit"],
-  month: ["numeric", "2-digit", "long", "short", "narrow"],
-  day: ["numeric", "2-digit"],
-  hour: ["numeric", "2-digit"],
-  minute: ["numeric", "2-digit"],
-  second: ["numeric", "2-digit"],
-  fractionalSecondDigits: [0, 1, 2, 3],
-  timeZoneName: ["long", "short"],
   calendar: [
     "buddhist",
     "chinese",
@@ -27,6 +16,7 @@ export const options = {
     "persian",
     "roc",
   ],
+  dayPeriod: ["narrow", "short", "long"],
   numberingSystem: [
     "arab",
     "arabext",
@@ -51,6 +41,21 @@ export const options = {
     "thai",
     "tibt",
   ],
+  localeMatcher: ["basic", "best fit"],
+  timeZone: ["UTC"],
+  hour12: [true, false],
+  hourCycle: ["h11", "h12", "h23", "h24"],
+  formatMatcher: ["basic", "best fit"],
+  weekday: ["long", "short", "narrow"],
+  era: ["long", "short", "narrow"],
+  year: ["numeric", "2-digit"],
+  month: ["numeric", "2-digit", "long", "short", "narrow"],
+  day: ["numeric", "2-digit"],
+  hour: ["numeric", "2-digit"],
+  minute: ["numeric", "2-digit"],
+  second: ["numeric", "2-digit"],
+  fractionalSecondDigits: [0, 1, 2, 3],
+  timeZoneName: ["long", "short"],
 } as const;
 
 export const optionKeys = Object.keys(options) as (keyof typeof options)[];
