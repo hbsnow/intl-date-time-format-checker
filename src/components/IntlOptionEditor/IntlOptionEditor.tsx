@@ -38,8 +38,14 @@ export const IntlOptionEditor = (props: Props): JSX.Element => {
   const handleValueChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
     const value = e.currentTarget.value;
 
-    if (typeof value !== "string" && typeof value !== "number") {
-      throw new Error("error: type of value must be string or number");
+    if (
+      typeof value !== "string" &&
+      typeof value !== "number" &&
+      typeof value !== "boolean"
+    ) {
+      throw new Error(
+        "error: type of value must be string or numberor boolean"
+      );
     }
 
     setSelectedValue(value);
@@ -75,8 +81,14 @@ export const IntlOptionEditor = (props: Props): JSX.Element => {
       <div>
         <code className={classnames("text-gray-400", "block")}>{"{"}</code>
         {Object.entries(option).map(([key, value]) => {
-          if (typeof value !== "string" && typeof value !== "number") {
-            throw new Error("error: type of value must be string or number");
+          if (
+            typeof value !== "string" &&
+            typeof value !== "number" &&
+            typeof value !== "boolean"
+          ) {
+            throw new Error(
+              "error: type of value must be string or number or boolean"
+            );
           }
 
           return (
@@ -84,7 +96,9 @@ export const IntlOptionEditor = (props: Props): JSX.Element => {
               <div>
                 <code className={classnames("text-blue-50")}>{key}</code>
                 <code className={classnames("text-gray-400")}>: </code>
-                <code className={classnames("text-blue-300")}>{value}</code>
+                <code
+                  className={classnames("text-blue-300")}
+                >{`${value}`}</code>
                 <code className={classnames("text-gray-400")}>,</code>
               </div>
               <div>
@@ -141,15 +155,19 @@ export const IntlOptionEditor = (props: Props): JSX.Element => {
             value={`${selectedValue}`}
           >
             {options[selectedKey].map((item: unknown) => {
-              if (typeof item !== "string" && typeof item !== "number") {
+              if (
+                typeof item !== "string" &&
+                typeof item !== "number" &&
+                typeof item !== "boolean"
+              ) {
                 throw new Error(
-                  "error: type of value must be string or number"
+                  "error: type of value must be string or number or boolean"
                 );
               }
 
               return (
-                <option key={item} value={item}>
-                  {item}
+                <option key={`${item}`} value={`${item}`}>
+                  {`${item}`}
                 </option>
               );
             })}

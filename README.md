@@ -1,1 +1,1 @@
-## Tailwind CSS and Next.js Example
+## Intl.DateTimeFormat() Checker
