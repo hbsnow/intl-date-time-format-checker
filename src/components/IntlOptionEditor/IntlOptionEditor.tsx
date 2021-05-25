@@ -11,6 +11,7 @@ import { classnames } from "tailwindcss-classnames";
 import { optionKeys, options } from "../../constants";
 import { Button } from "../../elements/Button";
 import { isOptionKey } from "../../utils/isOptionKey";
+import { toBoolean } from "../../utils/toBoolean";
 
 export type Props = Readonly<{
   option: Intl.DateTimeFormatOptions;
@@ -21,9 +22,13 @@ export const IntlOptionEditor = (props: Props): JSX.Element => {
   const { option, setOption } = props;
 
   const [selectedKey, setSelectedKey] = useState(optionKeys[0]);
-  const [selectedValue, setSelectedValue] = useState<string | number | boolean>(
-    options[optionKeys[0]][0]
-  );
+  const [selectedValue, setSelectedValue] = useState<string | number>(() => {
+    const value = options[optionKeys[0]][0];
+    if (typeof value === "boolean") {
+      return `${value}`;
+    }
+    return value;
+  });
 
   const handleKeyChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
     const key = e.currentTarget.value;
@@ -32,20 +37,14 @@ export const IntlOptionEditor = (props: Props): JSX.Element => {
     }
 
     setSelectedKey(key);
-    setSelectedValue(options[key][0]);
+    setSelectedValue(`${options[key][0]}`);
   };
 
   const handleValueChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
     const value = e.currentTarget.value;
 
-    if (
-      typeof value !== "string" &&
-      typeof value !== "number" &&
-      typeof value !== "boolean"
-    ) {
-      throw new Error(
-        "error: type of value must be string or numberor boolean"
-      );
+    if (typeof value !== "string") {
+      throw new Error("error: type of value must be string");
     }
 
     setSelectedValue(value);
@@ -54,7 +53,7 @@ export const IntlOptionEditor = (props: Props): JSX.Element => {
   const handleSubmitClick: MouseEventHandler<HTMLButtonElement> = () => {
     setOption((prevState) => ({
       ...prevState,
-      [selectedKey]: selectedValue,
+      [selectedKey]: toBoolean(selectedValue),
     }));
   };
 
