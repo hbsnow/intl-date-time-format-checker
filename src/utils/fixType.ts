@@ -10,7 +10,7 @@ export const fixType = <T extends string>(
       return false;
     }
 
-    if (/[0-9]+/g.test(arg)) {
+    if (/^[0-9]+$/.test(arg)) {
       return parseInt(arg);
     }
   }
