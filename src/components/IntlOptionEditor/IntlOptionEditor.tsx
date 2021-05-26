@@ -10,8 +10,9 @@ import { classnames } from "tailwindcss-classnames";
 
 import { optionKeys, options } from "../../constants";
 import { Button } from "../../elements/Button";
+import { fixType } from "../../utils/fixType";
 import { isOptionKey } from "../../utils/isOptionKey";
-import { toBoolean } from "../../utils/toBoolean";
+import { toValue } from "../../utils/toValue";
 
 export type Props = Readonly<{
   option: Intl.DateTimeFormatOptions;
@@ -22,13 +23,9 @@ export const IntlOptionEditor = (props: Props): JSX.Element => {
   const { option, setOption } = props;
 
   const [selectedKey, setSelectedKey] = useState(optionKeys[0]);
-  const [selectedValue, setSelectedValue] = useState<string | number>(() => {
-    const value = options[optionKeys[0]][0];
-    if (typeof value === "boolean") {
-      return `${value}`;
-    }
-    return value;
-  });
+  const [selectedValue, setSelectedValue] = useState(
+    `${options[optionKeys[0]][0]}`
+  );
 
   const handleKeyChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
     const key = e.currentTarget.value;
@@ -42,18 +39,13 @@ export const IntlOptionEditor = (props: Props): JSX.Element => {
 
   const handleValueChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
     const value = e.currentTarget.value;
-
-    if (typeof value !== "string") {
-      throw new Error("error: type of value must be string");
-    }
-
     setSelectedValue(value);
   };
 
   const handleSubmitClick: MouseEventHandler<HTMLButtonElement> = () => {
     setOption((prevState) => ({
       ...prevState,
-      [selectedKey]: toBoolean(selectedValue),
+      [selectedKey]: fixType(selectedValue),
     }));
   };
 
@@ -80,24 +72,14 @@ export const IntlOptionEditor = (props: Props): JSX.Element => {
       <div>
         <code className={classnames("text-gray-400", "block")}>{"{"}</code>
         {Object.entries(option).map(([key, value]) => {
-          if (
-            typeof value !== "string" &&
-            typeof value !== "number" &&
-            typeof value !== "boolean"
-          ) {
-            throw new Error(
-              "error: type of value must be string or number or boolean"
-            );
-          }
-
           return (
             <div key={key} className={classnames("flex", "space-x-2", "pl-4")}>
               <div>
                 <code className={classnames("text-blue-50")}>{key}</code>
                 <code className={classnames("text-gray-400")}>: </code>
-                <code
-                  className={classnames("text-blue-300")}
-                >{`${value}`}</code>
+                <code className={classnames("text-blue-300")}>
+                  {toValue(value)}
+                </code>
                 <code className={classnames("text-gray-400")}>,</code>
               </div>
               <div>
@@ -111,7 +93,8 @@ export const IntlOptionEditor = (props: Props): JSX.Element => {
                     "focus:ring-red-200",
                     "hover:bg-red-600",
                     "focus:outline-none",
-                    "focus:ring-2"
+                    "focus:ring-2",
+                    "select-none" // for copy
                   )}
                   value={key}
                   onClick={handleRemoveClick}
@@ -151,7 +134,7 @@ export const IntlOptionEditor = (props: Props): JSX.Element => {
           <select
             className={classnames("rounded", "text-sm")}
             onChange={handleValueChange}
-            value={`${selectedValue}`}
+            value={selectedValue}
           >
             {options[selectedKey].map((item: unknown) => {
               if (

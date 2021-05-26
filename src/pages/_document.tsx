@@ -21,16 +21,6 @@ class BaseDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <title>Intl.DateTimeFormat</title>
-
-          <meta name="description" content="Intl.DateTimeFormat Checker" />
-          <meta
-            name="viewport"
-            content="width=device-width,minimum-scale=1,initial-scale=1"
-          />
-
-          <link rel="icon" href="/favicon.ico" />
-
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <link
             rel="stylesheet"
